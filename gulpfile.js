@@ -11,6 +11,7 @@ var paths = {
     ],
     scripts: [
         'js/utils.js',
+        'js/objects.js',
         'js/main.js'
     ],
     styles: [
