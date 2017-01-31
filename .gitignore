@@ -4,3 +4,7 @@ npm-debug.log
 sass-cache/
 *.scssc
 
+# build-generated files
+css/main.css
+js/main.min.js
+
