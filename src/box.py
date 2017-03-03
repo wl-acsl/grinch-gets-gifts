@@ -6,7 +6,7 @@ class Box(object):
 	self.y = y
 	self.width = width
 	self.height = height
-	self.image = pygame.image.load("bluepresenticon.png").convert()
+	self.image = pygame.image.load("res/bluepresenticon.png").convert()
 	self.rect = pygame.Rect(x,y, width, height)
 
     def draw(self, screen):
