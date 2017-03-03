@@ -30,26 +30,27 @@ class Control(object):
             self.mode = Mode.MENU
             self.grinch = Grinch(self.screen_rect.width,self.screen_rect.height)
             self.boxstack = BoxStack()
-            self.fallrate = 2 # 100 pixels per second
+            self.fallrate = 2
+            # 100 pixels per second
 
-                self.boxstack.boxes.append(Box(0,0,100,200))
+            self.boxstack.boxes.append(Box(0,0,100,200))
 
-                pygame.time.set_timer(pygame.USEREVENT + 1, 20)
+            pygame.time.set_timer(pygame.USEREVENT + 1, 20)
 
         def event_loop(self):
                 for event in pygame.event.get():
                     self.keys = pygame.key.get_pressed()
-                        if event.type == pygame.QUIT or self.keys[pygame.K_ESCAPE]:
-                            self.done = True
-                        if event.type == pygame.USEREVENT + 1:
-                                for box in self.boxstack.boxes:
-                                    box.y += self.fallrate
+                    if event.type == pygame.QUIT or self.keys[pygame.K_ESCAPE]:
+                        self.done = True
+                    if event.type == pygame.USEREVENT + 1:
+                        for box in self.boxstack.boxes:
+                            box.y += self.fallrate
 
         def draw(self):
             self.screen.fill((50, 60, 50))
 
-                if self.mode == Mode.MENU:
-                    self.screen.fill((50, 0, 50))
+            if self.mode == Mode.MENU:
+                self.screen.fill((50, 0, 50))
 
                 self.screen.blit(self.grinch.image,[self.grinch.x,self.grinch.y])
 
@@ -62,10 +63,10 @@ class Control(object):
                     self.draw()
                     pygame.display.update()
                     self.clock.tick(self.fps)
-                        for box in self.boxstack.boxes:
-                                if box.y > self.screen_rect.height:
-                                    self.boxstack.boxes.pop()
-                                    print(len(self.boxstack.boxes))
+                    for box in self.boxstack.boxes:
+                        if box.y > self.screen_rect.height:
+                            self.boxstack.boxes.pop()
+                            print(len(self.boxstack.boxes))
 
 def main():
     Control().main_loop()
