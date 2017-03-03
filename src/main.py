@@ -30,6 +30,7 @@ class Control(object):
             self.mode = Mode.MENU
             self.grinch = Grinch(self.screen_rect.width,self.screen_rect.height)
             self.boxstack = BoxStack()
+            self.font = pygame.font.Font(None, 160)
 
             self.boxstack.boxes.append(Box(0,0,100,200))
 
@@ -59,7 +60,8 @@ class Control(object):
             self.screen.fill((50, 0, 50))
 
             if self.mode == Mode.MENU:
-                self.screen.fill((50, 0, 50))
+                self.screen.blit(self.font.render("Grinch Gets Gifts", True, (255, 255, 255)), (150, 100))
+                self.screen.blit(self.font.render("Press space to play!", True, (255, 255, 255)), (150, 500))
             elif self.mode == Mode.INGAME:
                 self.grinch.draw(self.screen)
 
