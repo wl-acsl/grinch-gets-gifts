@@ -1,13 +1,22 @@
 import os
 import pygame
 
+import random
+
 class Box(object):
     def __init__(self, x):
         self.x = x
 	self.y = 0
 	self.width = 80
 	self.height = 80
-	self.image = pygame.image.load(os.path.join("../res", "bluepresenticon.png")).convert()
+	s = random.randrange(3)
+	if(s == 0):
+		string = "bluepresenticon.png"
+	elif(s == 1):
+		string =  "redpresenticon.png"
+	else: string = "greenpresenticon.png"
+	self.image = pygame.image.load(os.path.join("../res", string)).convert()
+	self.image.set_colorkey((0,0,0))
 	self.rect = pygame.Rect(x,self.y, self.width, self.height)
         self.fallrate = 2
 
@@ -19,3 +28,5 @@ class Box(object):
 
     def draw(self, screen):
         screen.blit(self.image, [self.x, self.y])
+	
+	
