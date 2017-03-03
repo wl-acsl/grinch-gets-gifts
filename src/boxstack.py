@@ -5,4 +5,4 @@ class BoxStack(object):
 	self.boxes = []
 
 	def next():
-		return self.boxes.pop()
+	    return self.boxes.pop()

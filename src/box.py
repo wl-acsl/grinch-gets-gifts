@@ -9,6 +9,10 @@ class Box(object):
 	self.height = height
 	self.image = pygame.image.load(os.path.join("res", "bluepresenticon.png")).convert()
 	self.rect = pygame.Rect(x,y, width, height)
+        self.fallrate = 2
+
+    def fall(self):
+        self.y += self.fallrate
 
     def draw(self, screen):
         screen.blit(self.image, [self.x, self.y])

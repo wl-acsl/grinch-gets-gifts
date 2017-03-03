@@ -10,3 +10,6 @@ class Grinch(object):
 	self.image = pygame.image.load(os.path.join("res", "grinchicon.png")).convert()
 	self.image.set_colorkey((0,0,255))
 	self.rect = pygame.Rect(self.x,self.y, self.width, self.height)
+
+    def draw(self, screen):
+        screen.blit(self.image, [self.x, self.y])
