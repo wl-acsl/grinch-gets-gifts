@@ -33,6 +33,9 @@ class Control(object):
     def draw(self):
         self.screen.fill((50, 60, 50))
 
+        if self.mode == Mode.MENU:
+            self.screen.fill((50, 0, 50))
+
     def main_loop(self):
         while not self.done:
             self.event_loop()
