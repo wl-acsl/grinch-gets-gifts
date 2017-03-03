@@ -7,7 +7,7 @@ class Grinch(object):
 	self.width = 75 #see above
         self.x = (screenx - self.width) / 2
 	self.y = screeny - self.height
-	self.image = pygame.image.load(os.path.join("res", "grinchicon.png")).convert()
+	self.image = pygame.image.load(os.path.join("../res", "grinchicon.png")).convert()
 	self.image.set_colorkey((0,0,255))
 	self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
 

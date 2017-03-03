@@ -4,6 +4,7 @@ from enum import Enum
 
 import os
 import sys
+import random
 
 import pygame
 
@@ -32,9 +33,17 @@ class Control(object):
             self.boxstack = BoxStack()
             self.font = pygame.font.Font(None, 160)
 
-            self.boxstack.boxes.append(Box(0,0,100,200))
+            self.fallrate = 4 # 200 pixels per second
+
+            self.score = 0
+            self.streak = 0
+
+            self.myfont = pygame.font.SysFont("monospace",15)
+            self.boxstack.boxes.append(Box(20))
 
             pygame.time.set_timer(pygame.USEREVENT + 1, 20)
+
+		
 
         def event_loop(self):
             for event in pygame.event.get():
@@ -49,12 +58,12 @@ class Control(object):
                 if self.mode == Mode.INGAME:
                     if event.type == pygame.USEREVENT + 1:
                         for box in self.boxstack.boxes:
-                            box.fall()
+                            box.fall(self.fallrate)
 
-                    if self.keys[pygame.K_LEFT] or self.keys[pygame.K_a]:
-                        self.grinch.x -= 5
-                    if self.keys[pygame.K_RIGHT] or self.keys[pygame.K_d]:
-                        self.grinch.x += 5
+                    if (self.keys[pygame.K_LEFT] or self.keys[pygame.K_a]) and  self.grinch.x >= 20:
+                        self.grinch.x -= 8
+                    if (self.keys[pygame.K_RIGHT] or self.keys[pygame.K_d]) and self.grinch.y <= self.screen_rect.width - 20 - self.grinch.width:
+                        self.grinch.x += 8
 
         def draw(self):
             self.screen.fill((50, 0, 50))
@@ -68,18 +77,34 @@ class Control(object):
                 for box in self.boxstack.boxes:
                     box.draw(self.screen)
 
+                string = "Score: " + str(self.score) + " Streak: "+ str(self.streak)
+                label = self.myfont.render(string,1,(255,255,0))
+                self.screen.blit(label, (self.screen_rect.width - 200,5))
+
+                for box in self.boxstack.boxes:
+                        self.screen.blit(box.image,[box.x,box.y])
+
         def main_loop(self):
             while not self.done:
                 self.event_loop()
-
                 self.draw()
                 pygame.display.update()
 
                 self.clock.tick(self.fps)
                 for box in self.boxstack.boxes:
+                    boxRect = pygame.Rect(box.x,box.y, box.width, box.height)
+                    grinchRect = pygame.Rect(self.grinch.x,self.grinch.y, self.grinch.width, self.grinch.height)
                     if box.y > self.screen_rect.height:
                         self.boxstack.boxes.pop()
-                        print(len(self.boxstack.boxes))
+                        self.streak = 0
+                        self.boxstack.boxes.append(Box(random.random() * (self.screen_rect.width - 200)))
+                        self.fallrate = 4
+                    if boxRect.colliderect(grinchRect):
+                         self.streak += 1
+                         self.score += self.streak
+                         self.boxstack.boxes.remove(box)
+                         self.boxstack.boxes.append(Box(random.random() * (self.screen_rect.width - 200)))
+                         self.fallrate += 0.5
 
 def main():
     Control().main_loop()
