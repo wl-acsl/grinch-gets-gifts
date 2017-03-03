@@ -27,7 +27,7 @@ class Control(object):
             self.keys = pygame.key.get_pressed()
             self.clock = pygame.time.Clock()
             self.fps = 60.0
-            self.mode = Mode.INGAME
+            self.mode = Mode.MENU
             self.grinch = Grinch(self.screen_rect.width,self.screen_rect.height)
             self.boxstack = BoxStack()
 
@@ -42,12 +42,21 @@ class Control(object):
                 if event.type == pygame.QUIT or self.keys[pygame.K_ESCAPE]:
                     self.done = True
 
-                if event.type == pygame.USEREVENT + 1:
-                    for box in self.boxstack.boxes:
-                        box.fall()
+                if self.mode == Mode.MENU and self.keys[pygame.K_SPACE]:
+                    self.mode = Mode.INGAME
+
+                if self.mode == Mode.INGAME:
+                    if event.type == pygame.USEREVENT + 1:
+                        for box in self.boxstack.boxes:
+                            box.fall()
+
+                    if self.keys[pygame.K_LEFT] or self.keys[pygame.K_a]:
+                        self.grinch.x -= 5
+                    if self.keys[pygame.K_RIGHT] or self.keys[pygame.K_d]:
+                        self.grinch.x += 5
 
         def draw(self):
-            self.screen.fill((50, 60, 50))
+            self.screen.fill((50, 0, 50))
 
             if self.mode == Mode.MENU:
                 self.screen.fill((50, 0, 50))
