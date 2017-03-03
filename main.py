@@ -9,7 +9,7 @@ class Control(object):
         pg.init()
         os.environ["SDL_VIDEO_CENTERED"] = "TRUE"
         pg.display.set_caption("Grinch Gets Gifts")
-        self.screen = pg.display.set_mode((500, 500))
+        self.screen = pg.display.set_mode((0, 0), pg.FULLSCREEN)
         self.screen_rect = self.screen.get_rect()
         self.done = False
         self.keys = pg.key.get_pressed()
