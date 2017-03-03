@@ -48,11 +48,11 @@ class Control(object):
 
                 if self.mode == Mode.MENU:
                         self.screen.fill((50, 0, 50))
-        
+
                 self.screen.blit(self.grinch.image,[self.grinch.x,self.grinch.y])
 
                 for box in self.boxstack.boxes:
-                        self.screen.blit(box.image,[box.x,box.y])
+                    box.draw(self.screen)
 
         def main_loop(self):
                 while not self.done:

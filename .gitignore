@@ -3,4 +3,4 @@ yarn.lock
 npm-debug.log
 sass-cache/
 *.scssc
-
+*.pyc

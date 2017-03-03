@@ -8,3 +8,6 @@ class Box(object):
 	self.height = height
 	self.image = pygame.image.load("bluepresenticon.png").convert()
 	self.rect = pygame.Rect(x,y, width, height)
+
+    def draw(self, screen):
+        screen.blit(self.image, [self.x, self.y])
