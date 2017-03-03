@@ -30,10 +30,13 @@ class Control(object):
             if event.type == pg.QUIT or self.keys[pg.K_ESCAPE]:
                 self.done = True
 
+    def draw(self):
+        self.screen.fill((50, 60, 50))
+
     def main_loop(self):
         while not self.done:
             self.event_loop()
-            self.screen.fill((50, 60, 50))
+            self.draw()
             pg.display.update()
             self.clock.tick(self.fps)
 
