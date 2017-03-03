@@ -1,8 +1,15 @@
 #! /usr/bin/env python
 
+from enum import Enum
+
 import os
 import sys
 import pygame as pg
+
+class Mode(Enum):
+    MENU = 0
+    INGAME = 1
+    GAMEOVER = 2
 
 class Control(object):
     def __init__(self):
@@ -15,6 +22,7 @@ class Control(object):
         self.keys = pg.key.get_pressed()
         self.clock = pg.time.Clock()
         self.fps = 60.0
+        self.mode = Mode.MENU
 
     def event_loop(self):
         for event in pg.event.get():
