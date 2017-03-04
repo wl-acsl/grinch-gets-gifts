@@ -98,6 +98,10 @@ class Control(object):
                 for box in self.boxstack.boxes:
                         self.screen.blit(box.image,[box.x,box.y])
 
+            elif self.mode == Mode.GAMEOVER:
+                    scorestring = "Final Score: " + str(self.score)
+                    self.screen.blit(self.font.render(scorestring, True, (255, 255, 255)), (150, 100))
+
         def main_loop(self):
             while not self.done:
                 self.event_loop()
