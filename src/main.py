@@ -38,7 +38,7 @@ class Control(object):
             self.score = 0
             self.streak = 0
 
-            self.myfont = pygame.font.SysFont("monospace",15)
+            self.myfont = pygame.font.SysFont("monospace",40)
             self.boxstack.boxes.append(Box(20))
 
             pygame.time.set_timer(pygame.USEREVENT + 1, 20)
@@ -81,7 +81,7 @@ class Control(object):
 
                 string = "Score: " + str(self.score) + " Streak: "+ str(self.streak)
                 label = self.myfont.render(string,1,(255,255,0))
-                self.screen.blit(label, (self.screen_rect.width - 200,5))
+                self.screen.blit(label, (self.screen_rect.width - 450,5))
 
                 for box in self.boxstack.boxes:
                         self.screen.blit(box.image,[box.x,box.y])
