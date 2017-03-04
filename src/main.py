@@ -37,6 +37,7 @@ class Control(object):
 
             self.score = 0
             self.streak = 0
+            self.missleft = 3
 
             self.myfont = pygame.font.SysFont("monospace",40)
             self.boxstack.boxes.append(Box(20))
@@ -80,8 +81,11 @@ class Control(object):
                     box.draw(self.screen)
 
                 string = "Score: " + str(self.score) + " Streak: "+ str(self.streak)
+                string2 = str(self.missleft) + " misses left"
                 label = self.myfont.render(string,1,(255,255,0))
+                label2 = self.myfont.render(string2, 1, (255, 255, 0))
                 self.screen.blit(label, (self.screen_rect.width - 450,5))
+                self.screen.blit(label2, (self.screen_rect.width - 325,50))
 
                 for box in self.boxstack.boxes:
                         self.screen.blit(box.image,[box.x,box.y])
@@ -101,6 +105,9 @@ class Control(object):
                         self.streak = 0
                         self.boxstack.boxes.append(Box(random.random() * (self.screen_rect.width - 200)))
                         self.fallrate = 4
+                        self.missleft -= 1
+                        if self.missleft == 0:
+                            self.mode = Mode.GAMEOVER
                     if boxRect.colliderect(grinchRect):
                          self.streak += 1
                          self.score += self.streak
