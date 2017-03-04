@@ -16,10 +16,10 @@ class Box(object):
             string =  "redpresenticon.png"
         else:
             string = "greenpresenticon.png"
-            self.image = pygame.image.load(os.path.join("../res", string)).convert()
-            self.image.set_colorkey((0,0,0))
-            self.rect = pygame.Rect(x,self.y, self.width, self.height)
-            self.fallrate = 2
+        self.image = pygame.image.load(os.path.join("../res", string)).convert()
+        self.image.set_colorkey((0,0,0))
+        self.rect = pygame.Rect(x,self.y, self.width, self.height)
+        self.fallrate = 2
 
     def fall(self):
         self.y += self.fallrate
