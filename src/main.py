@@ -43,7 +43,7 @@ class Control(object):
 
             pygame.time.set_timer(pygame.USEREVENT + 1, 20)
 
-		
+
 
         def event_loop(self):
             for event in pygame.event.get():
@@ -73,7 +73,7 @@ class Control(object):
                 self.screen.blit(self.font.render("Press space to play!", True, (255, 255, 255)), (150, 500))
             elif self.mode == Mode.INGAME:
 
-		self.screen.blit(pygame.image.load(os.path.join("../res", "background.jpg")).convert(),(0,0))
+                self.screen.blit(pygame.image.load(os.path.join("../res", "background.jpg")).convert(),(0,0))
                 self.grinch.draw(self.screen)
 
                 for box in self.boxstack.boxes:
