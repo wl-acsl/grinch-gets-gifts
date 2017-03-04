@@ -35,6 +35,8 @@ class Control(object):
 
             self.fallrate = 4 # 200 pixels per second
 
+            self.highscore = 0
+
             self.score = 0
             self.streak = 0
             self.missleft = 3
@@ -90,10 +92,14 @@ class Control(object):
 
                 string = "Score: " + str(self.score) + " Streak: "+ str(self.streak)
                 string2 = str(self.missleft) + " misses left"
+                string3 = "High Score: " + str(self.highscore)
                 label = self.myfont.render(string,1,(255,255,0))
                 label2 = self.myfont.render(string2, 1, (255, 255, 0))
+                label3 = self.myfont.render(string3, 1, (255, 0, 0))
+                
                 self.screen.blit(label, (self.screen_rect.width - 520,5))
-                self.screen.blit(label2, (self.screen_rect.width - 325,50))
+                self.screen.blit(label2, (self.screen_rect.width - 520,50))
+                self.screen.blit(label3, (self.screen_rect.width - 520,100))
 
                 for box in self.boxstack.boxes:
                         self.screen.blit(box.image,[box.x,box.y])
@@ -101,6 +107,10 @@ class Control(object):
             elif self.mode == Mode.GAMEOVER:
                     scorestring = "Final Score: " + str(self.score)
                     self.screen.blit(self.font.render(scorestring, True, (255, 255, 255)), (150, 100))
+                    if self.score >= self.highscore:
+                        self.screen.blit(self.font.render("New High Score!", True, (255, 255, 255)), (150, 300))
+                        self.highscore = self.score
+                    self.screen.blit(self.font.render("Press space to restart!", True, (255, 255, 255)), (150, 500))
 
         def main_loop(self):
             while not self.done:
