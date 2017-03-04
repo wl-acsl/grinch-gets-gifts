@@ -66,6 +66,14 @@ class Control(object):
                     if (self.keys[pygame.K_RIGHT] or self.keys[pygame.K_d]) and self.grinch.y <= self.screen_rect.width - 20 - self.grinch.width:
                         self.grinch.x += 8
 
+                if self.mode == Mode.GAMEOVER:
+                    if self.keys[pygame.K_SPACE]:
+                        self.score = 0
+                        self.streak = 0
+                        self.missleft = 3
+                        self.fallrate = 4
+                        self.mode = Mode.INGAME
+
         def draw(self):
             self.screen.fill((50, 0, 50))
 
