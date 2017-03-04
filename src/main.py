@@ -92,7 +92,7 @@ class Control(object):
                 string2 = str(self.missleft) + " misses left"
                 label = self.myfont.render(string,1,(255,255,0))
                 label2 = self.myfont.render(string2, 1, (255, 255, 0))
-                self.screen.blit(label, (self.screen_rect.width - 450,5))
+                self.screen.blit(label, (self.screen_rect.width - 520,5))
                 self.screen.blit(label2, (self.screen_rect.width - 325,50))
 
                 for box in self.boxstack.boxes:
