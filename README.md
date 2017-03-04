@@ -3,4 +3,4 @@
 - - -
 
 A simple yet fun Dr. Seuss-inspired videogame.
-To run, run the command `src/main.py` from the main directory.
+To run, change directory into `src` and then run the command `./main.py`.
