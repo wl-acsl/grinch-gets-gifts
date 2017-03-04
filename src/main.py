@@ -96,7 +96,7 @@ class Control(object):
                 label = self.myfont.render(string,1,(255,255,0))
                 label2 = self.myfont.render(string2, 1, (255, 255, 0))
                 label3 = self.myfont.render(string3, 1, (255, 0, 0))
-                
+
                 self.screen.blit(label, (self.screen_rect.width - 520,5))
                 self.screen.blit(label2, (self.screen_rect.width - 520,50))
                 self.screen.blit(label3, (self.screen_rect.width - 520,100))
@@ -117,11 +117,14 @@ class Control(object):
                 self.event_loop()
                 self.draw()
                 pygame.display.update()
-
                 self.clock.tick(self.fps)
                 for box in self.boxstack.boxes:
                     boxRect = pygame.Rect(box.x,box.y, box.width, box.height)
                     grinchRect = pygame.Rect(self.grinch.x,self.grinch.y, self.grinch.width, self.grinch.height)
+                    if len(self.boxstack.boxes) < 3:
+                        chance = random.random()
+                        if chance < 0.01:
+                            self.boxstack.boxes.append(Box(random.random() * (self.screen_rect.width - 200)))
                     if box.y > self.screen_rect.height:
                         self.boxstack.boxes.pop()
                         self.streak = 0
